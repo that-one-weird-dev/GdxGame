@@ -1,1 +1,0 @@
-/home/skye/Projects/LibGDX/Test/core/build/classes/kotlin/main/Application.class:/home/skye/Projects/LibGDX/Test/core/build/classes/kotlin/main/com/skye/test/gdxtest/MainScreen.class

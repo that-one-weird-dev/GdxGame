@@ -9,14 +9,8 @@ import ktx.ashley.mapperFor
 const val MAX_LIFE = 100f
 
 class PlayerComponent : Component, Pool.Poolable {
-    var life = MAX_LIFE
-    var maxLife = MAX_LIFE
-    var distance = 0f
 
     override fun reset() {
-        life = MAX_LIFE
-        maxLife = MAX_LIFE
-        distance = 0f
     }
 
     companion object {

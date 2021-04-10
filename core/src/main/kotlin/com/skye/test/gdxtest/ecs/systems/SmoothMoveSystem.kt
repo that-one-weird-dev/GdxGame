@@ -11,8 +11,8 @@ import ktx.ashley.allOf
 
 
 class SmoothMoveSystem : IteratingSystem(allOf(MoveComponent::class, TransformComponent::class).get()) {
-    var accumulator = 0f
-    var alpha = 0f
+    private var accumulator = 0f
+    private var alpha = 0f
 
     override fun update(deltaTime: Float) {
         accumulator += deltaTime

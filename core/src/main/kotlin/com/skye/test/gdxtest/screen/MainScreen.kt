@@ -21,22 +21,8 @@ class MainScreen(game: GdxTest) : AbstractScreen(game) {
     override fun show() {
         LOG.debug { "Main screen shown" }
 
-        val test = engine.entity {
-            with<TransformComponent> {
-                setInitialPosition(8f, 4.5f, 0f)
-            }
-            with<MoveComponent>()
-            with<PlayerComponent>()
-            with<AnimationComponent>()
-            with<GraphicComponent>()
-            with<AnimationComponent> {
-                animation = AnimationProvider.getAnimation(GameAnimation.PLAYER_IDLE)
-            }
-        }
-
         engine.entity {
             with<TransformComponent> {
-                parent = test
                 setInitialPosition(8f, 4.5f, 0f)
                 size.set(2.5f, 2.5f)
             }

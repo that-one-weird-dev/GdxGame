@@ -21,7 +21,7 @@ class SmoothMoveSystem : IteratingSystem(allOf(MoveComponent::class, TransformCo
 
         alpha = accumulator / MOVE_SYSTEM_UPDATE_RATE
 
-        super.update(deltaTime)
+        super.update(MOVE_SYSTEM_UPDATE_RATE)
     }
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
@@ -29,8 +29,8 @@ class SmoothMoveSystem : IteratingSystem(allOf(MoveComponent::class, TransformCo
         val transform = entity.obtainTransform()
 
         move.interpolatedPosition.set(
-            MathUtils.lerp(move.prevPosition.x, transform.position.x, alpha),
-            MathUtils.lerp(move.prevPosition.y, transform.position.y, alpha),
+            MathUtils.lerp(move.prevPosition.x, transform.globalPosition.x, alpha),
+            MathUtils.lerp(move.prevPosition.y, transform.globalPosition.y, alpha),
             transform.position.z
         )
     }

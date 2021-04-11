@@ -27,7 +27,7 @@ class MoveSystem : IteratingSystem(allOf(TransformComponent::class, MoveComponen
         val transform = entity.obtainTransform()
         val move = entity.obtainMove()
 
-        move.prevPosition.set(transform.position)
+        move.prevPosition.set(transform.globalPosition)
 
         moveEntity(transform, move, deltaTime)
     }

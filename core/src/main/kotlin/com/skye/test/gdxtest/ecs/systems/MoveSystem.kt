@@ -6,7 +6,10 @@ import com.badlogic.gdx.math.MathUtils
 import com.skye.test.gdxtest.V_HEIGHT
 import com.skye.test.gdxtest.V_WIDTH
 import com.skye.test.gdxtest.ecs.components.*
+import com.skye.test.gdxtest.events.GameEvent
+import com.skye.test.gdxtest.events.GameEventManager
 import ktx.ashley.allOf
+import ktx.ashley.get
 
 
 const val MOVE_SYSTEM_UPDATE_RATE = 1 / 25f
@@ -30,6 +33,10 @@ class MoveSystem : IteratingSystem(allOf(TransformComponent::class, MoveComponen
         move.prevPosition.set(transform.globalPosition)
 
         moveEntity(transform, move, deltaTime)
+
+        entity[PlayerComponent.mapper]?.let {
+            GameEventManager.dispatchEvent(GameEvent.PlayerMove::class)
+        }
     }
 
     // Normally moves the local position of the entity

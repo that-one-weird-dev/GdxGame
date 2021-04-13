@@ -16,8 +16,9 @@ class AnimationSystem : IteratingSystem(allOf(AnimationComponent::class, Graphic
         val graphic = entity.obtainGraphic()
 
         animComp.stateTime += deltaTime
-        val frame = animComp.animation?.getKeyFrame(animComp.stateTime)
-        if (frame != null)
-            graphic.setSpriteRegion(frame)
+
+        animComp.animation?.getKeyFrame(animComp.stateTime)?.let {
+            graphic.setSpriteRegion(it)
+        }
     }
 }

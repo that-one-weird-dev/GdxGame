@@ -1,1 +1,3 @@
 include 'lwjgl3', 'core'
+include 'network'
+

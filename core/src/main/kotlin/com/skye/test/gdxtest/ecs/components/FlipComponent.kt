@@ -8,6 +8,7 @@ import ktx.ashley.mapperFor
 
 class FlipComponent : Component, Pool.Poolable {
     var flipped = false
+    var status = 1f
 
     override fun reset() {
         flipped = false

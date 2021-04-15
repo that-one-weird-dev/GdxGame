@@ -1,8 +1,8 @@
 package messages
 
-class MessageConnect() : Message {
+class MessageConnect() {
 
-    override fun pack(): ByteArray {
+    fun pack(): ByteArray {
         return ByteArray(0)
-    }
+   }
 }

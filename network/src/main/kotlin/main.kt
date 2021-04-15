@@ -1,26 +1,37 @@
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import net.joinu.rudp.RUDPSocket
-import net.joinu.rudp.runSuspending
-import net.joinu.rudp.send
-import java.net.InetSocketAddress
+import io.netty.bootstrap.ServerBootstrap
+import io.netty.channel.ChannelInitializer
+import io.netty.channel.ChannelOption
+import io.netty.channel.nio.NioEventLoopGroup
+import io.netty.channel.socket.SocketChannel
+import io.netty.channel.socket.nio.NioServerSocketChannel
+
+private const val PORT = 8000
 
 fun main() {
-    val addr1 = InetSocketAddress(1337)
-    val addr2 = InetSocketAddress(1338)
+    val bossGroup = NioEventLoopGroup()
+    val workerGroup = NioEventLoopGroup()
 
-    val s1 = RUDPSocket().apply { bind(addr1) }
-    val s2 = RUDPSocket().apply { bind(addr2) }
+    try {
+        val b = ServerBootstrap()
+        b.group(bossGroup, workerGroup)
+            .channel(NioServerSocketChannel::class.java)
+            .childHandler(object : ChannelInitializer<SocketChannel>() {
+                override fun initChannel(ch: SocketChannel) {
+                    ch.pipeline().addLast(EchoServerHandler())
+                }
+            })
+            .option(ChannelOption.SO_BACKLOG, 128)
+            .childOption(ChannelOption.SO_KEEPALIVE, true)
 
-    runBlocking {
-        launch { s1.runSuspending() }
-        launch { s2.runSuspending() }
+        // Bind and start to accept incoming connections.
+        val f = b.bind(PORT).sync()
 
-        s1.send(ByteArray(10), addr2)
-
-        val msg = s2.receive()
+        // Wait until the server socket is closed.
+        // In this example, this does not happen, but you can do that to gracefully
+        // shut down your server.
+        f.channel().closeFuture().sync()
+    } finally {
+        workerGroup.shutdownGracefully()
+        bossGroup.shutdownGracefully()
     }
-
-    s1.close()
-    s2.close()
 }

@@ -4,6 +4,9 @@ import io.netty.channel.ChannelOption
 import io.netty.channel.nio.NioEventLoopGroup
 import io.netty.channel.socket.SocketChannel
 import io.netty.channel.socket.nio.NioServerSocketChannel
+import io.netty.handler.codec.serialization.ClassResolvers
+import io.netty.handler.codec.serialization.ObjectDecoder
+import io.netty.handler.codec.serialization.ObjectEncoder
 
 private const val PORT = 8000
 
@@ -17,7 +20,11 @@ fun main() {
             .channel(NioServerSocketChannel::class.java)
             .childHandler(object : ChannelInitializer<SocketChannel>() {
                 override fun initChannel(ch: SocketChannel) {
-                    ch.pipeline().addLast(EchoServerHandler())
+                    ch.pipeline().addLast(
+                        ObjectDecoder(ClassResolvers.softCachingResolver(ClassLoader.getSystemClassLoader())),
+                        ObjectEncoder(),
+                        EchoServerHandler(),
+                    )
                 }
             })
             .option(ChannelOption.SO_BACKLOG, 128)

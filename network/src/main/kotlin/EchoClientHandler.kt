@@ -1,23 +1,17 @@
-import io.netty.buffer.ByteBuf
-import io.netty.buffer.Unpooled
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.ChannelInboundHandlerAdapter
+import java.io.Serializable
+import kotlin.reflect.typeOf
 
-class EchoClientHandler: ChannelInboundHandlerAdapter() {
+class EchoClientHandler : ChannelInboundHandlerAdapter() {
 
     override fun channelActive(ctx: ChannelHandlerContext) {
-        val buffer = Unpooled.buffer(4, 4)
-        for (char in "helo")
-            buffer.writeByte(char.toInt())
-
-        ctx.writeAndFlush(buffer)
+        ctx.writeAndFlush(Test("ciao"))
+        println("Packet sent")
     }
 
     override fun channelRead(ctx: ChannelHandlerContext, msg: Any) {
-        if (msg !is ByteBuf) return
-
-        while (msg.isReadable)
-            print(msg.readByte().toChar())
+        println("Received: ${msg.javaClass.name}")
     }
 
     override fun channelReadComplete(ctx: ChannelHandlerContext) {
@@ -29,3 +23,6 @@ class EchoClientHandler: ChannelInboundHandlerAdapter() {
         ctx.close()
     }
 }
+
+
+data class Test(val message: String) : Serializable

@@ -4,7 +4,7 @@ import io.netty.channel.ChannelInboundHandlerAdapter
 class EchoServerHandler : ChannelInboundHandlerAdapter() {
 
     override fun channelRead(ctx: ChannelHandlerContext, msg: Any) {
-        println("Received message: $msg")
+        println("Received message")
         ctx.write(msg)
     }
 

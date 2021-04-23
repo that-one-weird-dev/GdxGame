@@ -1,13 +1,13 @@
-package com.skye.test.gdxtest.ecs.systems
+package ecs.systems
 
+import V_HEIGHT
+import V_WIDTH
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem
 import com.badlogic.gdx.math.MathUtils
-import com.skye.test.gdxtest.V_HEIGHT
-import com.skye.test.gdxtest.V_WIDTH
-import com.skye.test.gdxtest.ecs.components.*
-import com.skye.test.gdxtest.events.GameEvent
-import com.skye.test.gdxtest.events.GameEventManager
+import ecs.components.*
+import events.GameEvent
+import events.GameEventManager
 import ktx.ashley.allOf
 import ktx.ashley.get
 

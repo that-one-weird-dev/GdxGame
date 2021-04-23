@@ -1,9 +1,9 @@
-package com.skye.test.gdxtest.screen
+package screen
 
+import GdxTest
 import com.badlogic.ashley.core.Engine
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.utils.viewport.Viewport
-import com.skye.test.gdxtest.GdxTest
 import ktx.app.KtxScreen
 
 abstract class AbstractScreen(

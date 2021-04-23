@@ -1,10 +1,10 @@
-package com.skye.test.gdxtest.ecs.systems
+package ecs.systems
 
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.SortedIteratingSystem
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.utils.viewport.Viewport
-import com.skye.test.gdxtest.ecs.components.*
+import ecs.components.*
 import ktx.ashley.allOf
 import ktx.ashley.get
 import ktx.graphics.use

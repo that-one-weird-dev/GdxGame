@@ -1,12 +1,11 @@
-package com.skye.test.gdxtest.ecs.systems
+package ecs.systems
 
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
 import com.badlogic.gdx.utils.viewport.Viewport
-import com.skye.test.gdxtest.GameAnimation
-import com.skye.test.gdxtest.ecs.components.*
+import ecs.components.*
 import ktx.ashley.allOf
 
 

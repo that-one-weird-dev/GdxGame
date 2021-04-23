@@ -1,9 +1,9 @@
-package com.skye.test.gdxtest.screen
+package screen
 
-import com.skye.test.gdxtest.AnimationProvider
-import com.skye.test.gdxtest.GameAnimation
-import com.skye.test.gdxtest.GdxTest
-import com.skye.test.gdxtest.ecs.components.*
+import AnimationProvider
+import GameAnimation
+import GdxTest
+import ecs.components.*
 import ktx.ashley.entity
 import ktx.ashley.with
 import ktx.log.debug

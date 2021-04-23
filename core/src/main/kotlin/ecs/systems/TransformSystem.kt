@@ -1,9 +1,9 @@
-package com.skye.test.gdxtest.ecs.systems
+package ecs.systems
 
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem
-import com.skye.test.gdxtest.ecs.components.TransformComponent
-import com.skye.test.gdxtest.ecs.components.obtainTransform
+import ecs.components.TransformComponent
+import ecs.components.obtainTransform
 import ktx.ashley.allOf
 import ktx.ashley.get
 

@@ -1,4 +1,4 @@
-package com.skye.test.gdxtest.ecs.components
+package ecs.components
 
 import com.badlogic.ashley.core.Component
 import com.badlogic.ashley.core.Entity

@@ -1,6 +1,5 @@
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration
-import com.skye.test.gdxtest.GdxTest
 
 fun main() {
     Lwjgl3Application(GdxTest(), Lwjgl3ApplicationConfiguration().apply {

@@ -5,13 +5,12 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.utils.viewport.FitViewport
-import com.skye.test.gdxtest.AnimationProvider
-import com.skye.test.gdxtest.ecs.systems.*
-import com.skye.test.gdxtest.screen.AbstractScreen
-import com.skye.test.gdxtest.screen.MainScreen
+import ecs.systems.*
 import ktx.app.KtxGame
 import ktx.log.debug
 import ktx.log.logger
+import screen.AbstractScreen
+import screen.MainScreen
 
 
 const val V_WIDTH = 16

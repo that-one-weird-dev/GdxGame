@@ -1,8 +1,8 @@
-package com.skye.test.gdxtest.ecs.systems
+package ecs.systems
 
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem
-import com.skye.test.gdxtest.ecs.components.*
+import ecs.components.*
 import ktx.ashley.allOf
 import java.lang.Float.max
 import kotlin.math.min

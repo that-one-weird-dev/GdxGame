@@ -1,4 +1,4 @@
-package com.skye.test.gdxtest.events
+package events
 
 import com.badlogic.gdx.utils.ObjectMap
 import ktx.collections.GdxSet

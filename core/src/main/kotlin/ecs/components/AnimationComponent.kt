@@ -1,11 +1,11 @@
-package com.skye.test.gdxtest.ecs.components
+package ecs.components
 
+import Animation2D
+import AnimationProvider
+import GameAnimation
 import com.badlogic.ashley.core.Component
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.utils.Pool
-import com.skye.test.gdxtest.Animation2D
-import com.skye.test.gdxtest.AnimationProvider
-import com.skye.test.gdxtest.GameAnimation
 import ktx.ashley.get
 import ktx.ashley.mapperFor
 
@@ -30,4 +30,4 @@ class AnimationComponent : Component, Pool.Poolable {
 }
 
 fun Entity.obtainAnimation() = this[AnimationComponent.mapper]
-    ?: throw KotlinNullPointerException("No AnimationComponent given for entity $this")
+    ?: throw KotlinNullPointerException("No ecs.components.AnimationComponent given for entity $this")

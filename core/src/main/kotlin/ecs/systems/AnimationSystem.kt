@@ -1,11 +1,11 @@
-package com.skye.test.gdxtest.ecs.systems
+package ecs.systems
 
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem
-import com.skye.test.gdxtest.ecs.components.AnimationComponent
-import com.skye.test.gdxtest.ecs.components.GraphicComponent
-import com.skye.test.gdxtest.ecs.components.obtainAnimation
-import com.skye.test.gdxtest.ecs.components.obtainGraphic
+import ecs.components.AnimationComponent
+import ecs.components.GraphicComponent
+import ecs.components.obtainAnimation
+import ecs.components.obtainGraphic
 import ktx.ashley.allOf
 
 class AnimationSystem : IteratingSystem(allOf(AnimationComponent::class, GraphicComponent::class).get()) {

@@ -7,7 +7,6 @@ import com.skye.test.gdxtest.ecs.components.GraphicComponent
 import com.skye.test.gdxtest.ecs.components.obtainAnimation
 import com.skye.test.gdxtest.ecs.components.obtainGraphic
 import ktx.ashley.allOf
-import ktx.log.debug
 
 class AnimationSystem : IteratingSystem(allOf(AnimationComponent::class, GraphicComponent::class).get()) {
 

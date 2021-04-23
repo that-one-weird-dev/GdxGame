@@ -1,5 +1,3 @@
-package com.skye.test.gdxtest
-
 import com.badlogic.ashley.core.Engine
 import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.Application
@@ -7,6 +5,7 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.utils.viewport.FitViewport
+import com.skye.test.gdxtest.AnimationProvider
 import com.skye.test.gdxtest.ecs.systems.*
 import com.skye.test.gdxtest.screen.AbstractScreen
 import com.skye.test.gdxtest.screen.MainScreen

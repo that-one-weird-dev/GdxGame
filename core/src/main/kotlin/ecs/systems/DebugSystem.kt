@@ -6,11 +6,9 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
 import com.skye.test.gdxtest.ecs.components.PlayerComponent
 import com.skye.test.gdxtest.ecs.components.TransformComponent
-import com.skye.test.gdxtest.ecs.components.obtainPlayer
 import com.skye.test.gdxtest.ecs.components.obtainTransform
 import ktx.ashley.allOf
 import ktx.ashley.getSystem
-import ktx.log.debug
 
 private const val DEBUG_INTERVAL = .25f
 private const val DEBUG_ENABLED = true

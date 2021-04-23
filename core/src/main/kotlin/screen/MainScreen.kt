@@ -1,7 +1,5 @@
 package com.skye.test.gdxtest.screen
 
-import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.skye.test.gdxtest.AnimationProvider
 import com.skye.test.gdxtest.GameAnimation
 import com.skye.test.gdxtest.GdxTest

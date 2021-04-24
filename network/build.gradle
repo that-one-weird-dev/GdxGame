@@ -1,17 +1,16 @@
-plugins {
-    id 'org.jetbrains.kotlin.jvm'
-}
+apply plugin: 'application'
 
 version '0.0.1'
 
-repositories {
-    mavenCentral()
-}
-
 dependencies {
+    implementation project(':common')
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
     compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.26'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3'
 
     implementation group: 'io.netty', name: 'netty-all', version: '4.1.63.Final'
+
+    implementation 'com.badlogicgames.gdx:gdx-backend-headless:1.9.14'
+    implementation "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
 }

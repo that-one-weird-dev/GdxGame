@@ -15,7 +15,7 @@ private const val PORT = 8000
 class Application : ApplicationListener {
 
     override fun create() {
-//        initializeServer()
+        initializeServer()
     }
 
     override fun dispose() {}

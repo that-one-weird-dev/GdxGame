@@ -2,9 +2,8 @@ package screen
 
 import AnimationProvider
 import GameAnimation
-import GdxTest
+import Game
 import ecs.components.*
-import ktx.ashley.entity
 import ktx.ashley.with
 import ktx.log.debug
 import ktx.log.logger
@@ -14,7 +13,7 @@ private val LOG = logger<MainScreen>()
 
 private const val MAX_DELTA_TIME = 1 / 20f
 
-class MainScreen(game: GdxTest) : AbstractScreen(game) {
+class MainScreen(game: Game) : AbstractScreen(game) {
 
     override fun show() {
         LOG.debug { "Main screen shown" }

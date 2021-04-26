@@ -19,7 +19,7 @@ class MainScreen(game: GdxTest) : AbstractScreen(game) {
     override fun show() {
         LOG.debug { "Main screen shown" }
 
-        engine.entity {
+        createEntity {
             with<TransformComponent> {
                 setInitialPosition(8f, 4.5f, 0f)
                 size.set(2.5f, 2.5f)

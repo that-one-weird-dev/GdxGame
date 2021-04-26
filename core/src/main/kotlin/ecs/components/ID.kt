@@ -20,4 +20,4 @@ class ID : Component, Pool.Poolable, Serializable {
 }
 
 fun Entity.obtainId() = this[ID.mapper]
-    ?: throw KotlinNullPointerException("No GraphicComponent given for entity $this")
+    ?: throw KotlinNullPointerException("No ID given for entity $this")

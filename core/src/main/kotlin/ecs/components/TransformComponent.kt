@@ -7,14 +7,16 @@ import com.badlogic.gdx.math.Vector3
 import com.badlogic.gdx.utils.Pool
 import ktx.ashley.get
 import ktx.ashley.mapperFor
+import java.io.Serializable
 
-class TransformComponent : Component, Pool.Poolable, Comparable<TransformComponent> {
+class TransformComponent : Component, Pool.Poolable, Comparable<TransformComponent>, Serializable {
     val position = Vector3()
     val globalPosition = Vector3()
 
     val size = Vector2(1f, 1f)
     var rotationDeg = 0f
 
+    @Transient
     var parent: Entity? = null
 
     override fun reset() {

@@ -11,7 +11,9 @@ import ktx.ashley.mapperFor
 
 class MoveComponent : Component, Pool.Poolable {
     val speed = Vector2()
+    @Transient
     val prevPosition = Vector3()
+    @Transient
     val interpolatedPosition = Vector3()
 
     override fun reset() {

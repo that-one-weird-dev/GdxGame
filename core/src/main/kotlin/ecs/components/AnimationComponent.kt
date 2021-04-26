@@ -8,16 +8,19 @@ import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.utils.Pool
 import ktx.ashley.get
 import ktx.ashley.mapperFor
+import java.io.Serializable
 
 
-class AnimationComponent : Component, Pool.Poolable {
+class AnimationComponent : Component, Pool.Poolable, Serializable {
     var currentAnimation: GameAnimation = GameAnimation.NONE
         set(value) {
             animation = AnimationProvider.getAnimation(value)
             field = value
         }
 
+    @Transient
     var animation: Animation2D? = null
+    @Transient
     var stateTime = 0f
 
     override fun reset() {

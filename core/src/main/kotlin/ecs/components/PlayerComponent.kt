@@ -5,10 +5,11 @@ import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.utils.Pool
 import ktx.ashley.get
 import ktx.ashley.mapperFor
+import java.io.Serializable
 
 const val MAX_LIFE = 100f
 
-class PlayerComponent : Component, Pool.Poolable {
+class PlayerComponent : Component, Pool.Poolable, Serializable {
 
     override fun reset() {
     }

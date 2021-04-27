@@ -15,6 +15,14 @@ object ComponentPacker {
         get(obj::class.java).methods[name]?.invoke(obj)
     }
 
+    fun packComponent(obj: EntityComponent): Map<String, Any?> {
+        val cl = obj::class.java
+
+        return get(cl).fields.mapValues {
+            it.value.field.get(obj)
+        }
+    }
+
     private fun addReflection(cl: Class<*>): ComponentReflection {
         val fieldSetters = mutableMapOf<String, ComponentReflection.FieldSetter>()
         val methods = mutableMapOf<String, Method>()
@@ -51,11 +59,5 @@ object ComponentPacker {
     }
 }
 
-fun EntityComponent.pack(): Map<String, Any?> {
-    val cl = this::class.java
-    val crc = ComponentPacker.get(cl)
-
-    return crc.fields.mapValues {
-        it.value.field.get(this)
-    }
-}
+fun EntityComponent.pack(): Map<String, Any?> = ComponentPacker.packComponent(this)
+fun EntityComponent.callMethod(name: String) = ComponentPacker.callMethod(this, name)

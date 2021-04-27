@@ -19,15 +19,6 @@ abstract class AbstractScreen(
     val engine: Engine = game.engine,
 ) : KtxScreen {
 
-    inline fun createEntity(configure: EngineEntity.() -> Unit): Entity {
-        return engine.entity {
-            with<ID> {
-                id = UUID.randomUUID().toString()
-            }
-            configure()
-        }
-    }
-
     override fun resize(width: Int, height: Int) {
         gameViewport.update(width, height, true)
     }

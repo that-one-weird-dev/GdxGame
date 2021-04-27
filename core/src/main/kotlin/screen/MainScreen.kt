@@ -4,6 +4,7 @@ import AnimationProvider
 import GameAnimation
 import Game
 import ecs.components.*
+import ecs.createEntityWithId
 import ktx.ashley.with
 import ktx.log.debug
 import ktx.log.logger
@@ -18,7 +19,7 @@ class MainScreen(game: Game) : AbstractScreen(game) {
     override fun show() {
         LOG.debug { "Main screen shown" }
 
-        createEntity {
+        engine.createEntityWithId {
             with<TransformComponent> {
                 setInitialPosition(8f, 4.5f, 0f)
                 size.set(2.5f, 2.5f)

@@ -5,7 +5,7 @@ import java.lang.reflect.Method
 
 class ComponentReflection(
     val fields: Map<String, FieldSetter> = mapOf(),
-    val methods: Array<Method> = arrayOf(),
+    val methods: Map<String, Method> = mapOf(),
 ) {
     data class FieldSetter(val field: Field, val setter: Method)
 }

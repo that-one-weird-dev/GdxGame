@@ -10,9 +10,14 @@ object ComponentPacker {
 
     fun get(cl: Class<*>): ComponentReflection = cache[cl] ?: addReflection(cl)
 
+    // TODO: Implement arguments
+    fun callMethod(obj: Any, name: String) {
+        get(obj::class.java).methods[name]?.invoke(obj)
+    }
+
     private fun addReflection(cl: Class<*>): ComponentReflection {
         val fieldSetters = mutableMapOf<String, ComponentReflection.FieldSetter>()
-        val methods = mutableListOf<Method>()
+        val methods = mutableMapOf<String, Method>()
 
         cl.declaredFields.forEach { field ->
             if (field.annotations.find { it is Sync } == null) return@forEach
@@ -36,12 +41,12 @@ object ComponentPacker {
             if (method.annotations.find { it is SyncMethod } == null) return@forEach
 
             method.trySetAccessible()
-            methods.add(method)
+            methods[method.name] = method
         }
 
         return ComponentReflection(
             fieldSetters,
-            methods.toTypedArray(),
+            methods,
         )
     }
 }

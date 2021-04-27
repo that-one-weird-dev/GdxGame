@@ -1,8 +1,8 @@
 package packets
 
 import Game
-import ecs.Synchronizable
-import ecs.SynchronizedComponent
+import ecs.components.network.Synchronizable
+import ecs.components.network.SynchronizedComponent
 import ktx.ashley.get
 
 data class PacketUpdateComponent(

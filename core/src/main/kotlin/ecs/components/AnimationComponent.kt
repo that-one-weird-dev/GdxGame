@@ -4,14 +4,18 @@ import Animation2D
 import AnimationProvider
 import GameAnimation
 import com.badlogic.ashley.core.Component
+import com.badlogic.ashley.core.ComponentMapper
 import com.badlogic.ashley.core.Entity
-import com.badlogic.gdx.utils.Pool
+import ecs.components.network.Synchronizable
+import ecs.components.network.SynchronizedComponent
+import ktx.ashley.EngineEntity
 import ktx.ashley.get
 import ktx.ashley.mapperFor
+import ktx.ashley.with
 import java.io.Serializable
 
 
-class AnimationComponent : Component, Pool.Poolable, Serializable {
+class AnimationComponent : SynchronizedComponent, Synchronizable {
     var currentAnimation: GameAnimation = GameAnimation.NONE
         set(value) {
             animation = AnimationProvider.getAnimation(value)
@@ -25,6 +29,20 @@ class AnimationComponent : Component, Pool.Poolable, Serializable {
 
     override fun reset() {
         stateTime = 0f
+    }
+
+    override fun toSync(): Synchronizable = this
+    override fun synchronize(data: Serializable) {
+        if (data !is AnimationComponent) return
+
+        this.currentAnimation = data.currentAnimation
+    }
+
+    override fun getMapper(): ComponentMapper<out Component> = mapper
+    override fun initialize(entity: EngineEntity) {
+        entity.with<AnimationComponent> {
+            synchronize(this)
+        }
     }
 
     companion object {

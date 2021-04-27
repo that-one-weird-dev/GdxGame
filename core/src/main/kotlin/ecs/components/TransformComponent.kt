@@ -6,8 +6,8 @@ import com.badlogic.ashley.core.ComponentMapper
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
-import ecs.Synchronizable
-import ecs.SynchronizedComponent
+import ecs.components.network.Synchronizable
+import ecs.components.network.SynchronizedComponent
 import ktx.ashley.EngineEntity
 import ktx.ashley.get
 import ktx.ashley.mapperFor
@@ -51,6 +51,13 @@ class TransformComponent : SynchronizedComponent, Comparable<TransformComponent>
         if (data.parent != null)
             this.parent = Game.entities[data.parent]
     }
+
+    override fun toSync(): Synchronizable = TransformComponentSync(
+        position,
+        size,
+        rotationDeg,
+        parent?.get(ID.mapper)?.id,
+    )
 
     data class TransformComponentSync(
         val position: Vector3?,

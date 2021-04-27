@@ -1,17 +1,12 @@
 package ecs.components
 
-import com.badlogic.ashley.core.Component
-import com.badlogic.ashley.core.ComponentMapper
 import com.badlogic.ashley.core.Entity
 import ecs.EntityComponent
 import ecs.components.synchronization.Sync
-import ktx.ashley.EngineEntity
 import ktx.ashley.get
 import ktx.ashley.mapperFor
-import ktx.ashley.with
-import java.io.Serializable
 
-class ID : EntityComponent {
+class IDComponent : EntityComponent {
     @Sync
     var id: String = ""
 
@@ -20,9 +15,9 @@ class ID : EntityComponent {
     }
 
     companion object {
-        val mapper = mapperFor<ID>()
+        val mapper = mapperFor<IDComponent>()
     }
 }
 
-fun Entity.obtainId() = this[ID.mapper]
+fun Entity.obtainId() = this[IDComponent.mapper]
     ?: throw KotlinNullPointerException("No ID given for entity $this")

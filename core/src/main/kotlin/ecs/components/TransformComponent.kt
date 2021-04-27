@@ -55,7 +55,8 @@ class TransformComponent : SynchronizedComponent, Comparable<TransformComponent>
         val rotation: Float?,
         val parent: String?
     ) : Synchronizable<TransformComponent> {
-        override val mapper: ComponentMapper<TransformComponent> = TransformComponent.mapper
+        override val mapper: ComponentMapper<TransformComponent>
+            get() = TransformComponent.mapper
     }
 
     companion object {

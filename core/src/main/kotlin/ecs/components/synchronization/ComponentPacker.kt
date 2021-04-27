@@ -60,4 +60,4 @@ object ComponentPacker {
 }
 
 fun EntityComponent.pack(): Map<String, Any?> = ComponentPacker.packComponent(this)
-fun EntityComponent.callMethod(name: String) = ComponentPacker.callMethod(this, name)
+fun EntityComponent.callMethod(name: String, vararg args: Any?) = ComponentPacker.callMethod(this, name, args = args)

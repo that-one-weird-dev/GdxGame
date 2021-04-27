@@ -24,7 +24,7 @@ class MainScreen(game: Game) : AbstractScreen(game) {
 
         val comp = FlipComponent()
         println(comp.pack())
-        ComponentPacker.callMethod(comp, "testMethod", "testParam")
+        comp.callMethod("testMethod", "testParam")
 
         engine.createEntityWithId {
             with<TransformComponent> {

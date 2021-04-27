@@ -6,7 +6,7 @@ import java.lang.reflect.Field
 import java.lang.reflect.Method
 
 object ComponentPacker {
-    val cache = ObjectMap<Class<*>, ComponentReflection>()
+    private val cache = ObjectMap<Class<*>, ComponentReflection>()
 
     fun get(cl: Class<*>): ComponentReflection = cache[cl] ?: addReflection(cl)
 

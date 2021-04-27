@@ -4,6 +4,6 @@ import java.lang.reflect.Field
 import java.lang.reflect.Method
 
 class ComponentReflection(
-    val fields: Array<Field> = arrayOf<Field>(),
+    val fields: Array<Field> = arrayOf(),
     val onSyncMethod: Method? = null,
 )

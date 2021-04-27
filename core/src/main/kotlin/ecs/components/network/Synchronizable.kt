@@ -1,4 +1,4 @@
-package ecs
+package ecs.components.network
 
 import com.badlogic.ashley.core.Component
 import com.badlogic.ashley.core.ComponentMapper

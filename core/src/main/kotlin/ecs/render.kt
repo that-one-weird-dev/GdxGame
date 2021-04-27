@@ -2,7 +2,7 @@ package ecs
 
 import com.badlogic.ashley.core.Engine
 import com.badlogic.ashley.core.Entity
-import ecs.components.ID
+import ecs.components.IDComponent
 import ktx.ashley.EngineEntity
 import ktx.ashley.entity
 import ktx.ashley.with
@@ -14,7 +14,7 @@ inline fun Engine.createEntityWithId(
     configure: EngineEntity.() -> Unit
 ): Entity {
     return entity {
-        with<ID> {
+        with<IDComponent> {
             this.id = id
         }
         configure()

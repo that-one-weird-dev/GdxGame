@@ -1,11 +1,14 @@
 package ecs.components.synchronization
 
+/**
+ * If used in java you must also implement a setter for the
+ * field with the name like this: setFieldname,
+ * where Fieldname is the name of the field.
+ *
+ * And in kotlin it must be a var and not a val
+ */
 @Target(AnnotationTarget.FIELD)
 annotation class Sync
 
-
-/**
- * Must be given to a method that has data of type Map<String, Any?> as the only parameter
- */
 @Target(AnnotationTarget.FUNCTION)
-annotation class OnSync
+annotation class SyncMethod

@@ -4,6 +4,7 @@ import AnimationProvider
 import GameAnimation
 import Game
 import ecs.components.*
+import ecs.components.synchronization.pack
 import ecs.createEntityWithId
 import ktx.ashley.with
 import ktx.log.debug
@@ -18,6 +19,9 @@ class MainScreen(game: Game) : AbstractScreen(game) {
 
     override fun show() {
         LOG.debug { "Main screen shown" }
+
+        val comp = FlipComponent()
+        println(comp.pack())
 
         engine.createEntityWithId {
             with<TransformComponent> {

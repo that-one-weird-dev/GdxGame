@@ -4,6 +4,8 @@ import AnimationProvider
 import GameAnimation
 import Game
 import ecs.components.*
+import ecs.components.synchronization.ComponentPacker
+import ecs.components.synchronization.callMethod
 import ecs.components.synchronization.pack
 import ecs.createEntityWithId
 import ktx.ashley.with
@@ -22,6 +24,7 @@ class MainScreen(game: Game) : AbstractScreen(game) {
 
         val comp = FlipComponent()
         println(comp.pack())
+        ComponentPacker.callMethod(comp, "testMethod", "testParam")
 
         engine.createEntityWithId {
             with<TransformComponent> {

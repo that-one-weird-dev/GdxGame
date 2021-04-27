@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.ComponentMapper
 import com.badlogic.ashley.core.Entity
 import ecs.EntityComponent
 import ecs.components.synchronization.Sync
+import ecs.components.synchronization.SyncMethod
 import ktx.ashley.EngineEntity
 import ktx.ashley.get
 import ktx.ashley.mapperFor
@@ -15,6 +16,11 @@ class FlipComponent : EntityComponent {
     @Sync
     var flipped = false
     var status = 1f
+
+    @SyncMethod
+    fun testMethod(test: String) {
+        println("testMethod: $test")
+    }
 
     override fun reset() {
         flipped = false

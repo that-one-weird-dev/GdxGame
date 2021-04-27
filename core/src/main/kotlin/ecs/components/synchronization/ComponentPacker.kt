@@ -11,8 +11,8 @@ object ComponentPacker {
     fun get(cl: Class<*>): ComponentReflection = cache[cl] ?: addReflection(cl)
 
     // TODO: Implement arguments
-    fun callMethod(obj: Any, name: String) {
-        get(obj::class.java).methods[name]?.invoke(obj)
+    fun callMethod(obj: Any, name: String, vararg args: Any?) {
+        get(obj::class.java).methods[name]?.invoke(obj, *args)
     }
 
     fun packComponent(obj: EntityComponent): Map<String, Any?> {

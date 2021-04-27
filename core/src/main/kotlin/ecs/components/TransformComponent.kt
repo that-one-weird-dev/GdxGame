@@ -1,14 +1,17 @@
 package ecs.components
 
 import Game
+import com.badlogic.ashley.core.Component
 import com.badlogic.ashley.core.ComponentMapper
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
 import ecs.Synchronizable
 import ecs.SynchronizedComponent
+import ktx.ashley.EngineEntity
 import ktx.ashley.get
 import ktx.ashley.mapperFor
+import ktx.ashley.with
 import java.io.Serializable
 
 class TransformComponent : SynchronizedComponent, Comparable<TransformComponent> {
@@ -54,9 +57,14 @@ class TransformComponent : SynchronizedComponent, Comparable<TransformComponent>
         val size: Vector2?,
         val rotation: Float?,
         val parent: String?
-    ) : Synchronizable<TransformComponent> {
-        override val mapper: ComponentMapper<TransformComponent>
-            get() = TransformComponent.mapper
+    ) : Synchronizable {
+        override fun getMapper(): ComponentMapper<out Component> = mapper
+
+        override fun initialize(entity: EngineEntity) {
+            entity.with<TransformComponent> {
+                synchronize(this@TransformComponentSync)
+            }
+        }
     }
 
     companion object {

@@ -1,7 +1,6 @@
 package ecs.components.synchronization
 
 import com.badlogic.gdx.utils.ObjectMap
-import ecs.components.network.SynchronizedComponent
 import java.lang.reflect.Field
 import java.lang.reflect.Method
 
@@ -39,7 +38,7 @@ object ComponentPacker {
     }
 }
 
-fun SynchronizedComponent.pack(): Map<String, Any?> {
+fun Synchronized.pack(): Map<String, Any?> {
     val cl = this::class.java
     val crc = ComponentPacker.get(cl)
 

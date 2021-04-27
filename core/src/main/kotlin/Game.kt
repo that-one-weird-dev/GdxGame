@@ -47,7 +47,6 @@ class Game : KtxGame<AbstractScreen>() {
             override fun entityAdded(entity: Entity) {
                 val id = entity.obtainId()
                 entities[id.id] = entity
-                println("entity added")
             }
             override fun entityRemoved(entity: Entity) {
                 val id = entity.obtainId()

@@ -1,16 +1,17 @@
 package ecs.components.synchronization
 
+import com.badlogic.ashley.core.Component
+import com.badlogic.ashley.core.ComponentMapper
 import com.badlogic.gdx.utils.ObjectMap
 import ecs.EntityComponent
-import java.lang.reflect.Field
 import java.lang.reflect.Method
 
 object ComponentPacker {
-    private val cache = ObjectMap<Class<*>, ComponentReflection>()
+    private val cache = ObjectMap<Class<out EntityComponent>, ComponentReflection>()
 
-    fun get(cl: Class<*>): ComponentReflection = cache[cl] ?: addReflection(cl)
+    fun get(cl: Class<out EntityComponent>): ComponentReflection = cache[cl] ?: addReflection(cl)
 
-    fun callMethod(obj: Any, name: String, vararg args: Any?) {
+    fun callMethod(obj: EntityComponent, name: String, vararg args: Any?) {
         get(obj::class.java).methods[name]?.invoke(obj, *args)
     }
 
@@ -26,9 +27,20 @@ object ComponentPacker {
         get(obj::class.java).fields[name]?.setter?.invoke(obj, value)
     }
 
-    private fun addReflection(cl: Class<*>): ComponentReflection {
+    fun getMapper(cl: Class<out EntityComponent>): ComponentMapper<out Component> {
+        return get(cl).mapper
+    }
+
+    private fun addReflection(cl: Class<out EntityComponent>): ComponentReflection {
         val fieldSetters = mutableMapOf<String, ComponentReflection.FieldSetter>()
         val methods = mutableMapOf<String, Method>()
+
+        val mapper = try {
+            val companion = cl.getField("Companion").get(null)
+            companion::class.java.getMethod("getMapper").invoke(companion) as ComponentMapper<out Component>
+        } catch (e: Exception) {
+            throw NoMapperFoundInComponent(cl)
+        }
 
         cl.declaredFields.forEach { field ->
             if (field.annotations.find { it is Sync } == null) return@forEach
@@ -58,6 +70,7 @@ object ComponentPacker {
         return ComponentReflection(
             fieldSetters,
             methods,
+            mapper
         )
     }
 }
@@ -65,3 +78,4 @@ object ComponentPacker {
 fun EntityComponent.pack(): Map<String, Any?> = ComponentPacker.packComponent(this)
 fun EntityComponent.callMethod(name: String, vararg args: Any?) = ComponentPacker.callMethod(this, name, args = args)
 fun EntityComponent.setField(name: String, value: Any?) = ComponentPacker.setField(this, name, value)
+fun EntityComponent.getMapper() = ComponentPacker.getMapper(this::class.java)

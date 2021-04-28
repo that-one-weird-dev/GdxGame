@@ -1,7 +1,7 @@
 package ecs.components.synchronization
 
-import ecs.EntityComponent
+import com.badlogic.ashley.core.Component
 import java.lang.Exception
 
-class NoMapperFoundInComponent(cl: Class<out EntityComponent>) :
+class NoMapperFoundInComponent(cl: Class<out Component>) :
     Exception("No mapper were found in the companion object of: ${cl.name}")

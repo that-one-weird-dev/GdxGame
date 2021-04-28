@@ -7,15 +7,15 @@ import ecs.EntityComponent
 import java.lang.reflect.Method
 
 object ComponentPacker {
-    private val cache = ObjectMap<Class<out EntityComponent>, ComponentReflection>()
+    private val cache = ObjectMap<Class<out Component>, ComponentReflection>()
 
-    fun get(cl: Class<out EntityComponent>): ComponentReflection = cache[cl] ?: addReflection(cl)
+    fun get(cl: Class<out Component>): ComponentReflection = cache[cl] ?: addReflection(cl)
 
-    fun callMethod(obj: EntityComponent, name: String, vararg args: Any?) {
+    fun callMethod(obj: Component, name: String, vararg args: Any?) {
         get(obj::class.java).methods[name]?.invoke(obj, *args)
     }
 
-    fun packComponent(obj: EntityComponent): Map<String, Any?> {
+    fun packComponent(obj: Component): Map<String, Any?> {
         val cl = obj::class.java
 
         return get(cl).fields.mapValues {
@@ -23,15 +23,15 @@ object ComponentPacker {
         }
     }
 
-    fun setField(obj: EntityComponent, name: String, value: Any?) {
+    fun setField(obj: Component, name: String, value: Any?) {
         get(obj::class.java).fields[name]?.setter?.invoke(obj, value)
     }
 
-    fun getMapper(cl: Class<out EntityComponent>): ComponentMapper<out Component> {
+    fun getMapper(cl: Class<out Component>): ComponentMapper<out Component> {
         return get(cl).mapper
     }
 
-    private fun addReflection(cl: Class<out EntityComponent>): ComponentReflection {
+    private fun addReflection(cl: Class<out Component>): ComponentReflection {
         val fieldSetters = mutableMapOf<String, ComponentReflection.FieldSetter>()
         val methods = mutableMapOf<String, Method>()
 
@@ -75,9 +75,9 @@ object ComponentPacker {
     }
 }
 
-fun EntityComponent.pack(): Map<String, Any?> = ComponentPacker.packComponent(this)
-fun EntityComponent.callMethod(name: String, vararg args: Any?) = ComponentPacker.callMethod(this, name, args = args)
-fun EntityComponent.setField(name: String, value: Any?) = ComponentPacker.setField(this, name, value)
-fun EntityComponent.getMapper() = ComponentPacker.getMapper(this::class.java)
+fun Component.pack(): Map<String, Any?> = ComponentPacker.packComponent(this)
+fun Component.callMethod(name: String, vararg args: Any?) = ComponentPacker.callMethod(this, name, args = args)
+fun Component.setField(name: String, value: Any?) = ComponentPacker.setField(this, name, value)
+fun Component.getMapper() = ComponentPacker.getMapper(this::class.java)
 
-fun Class<out EntityComponent>.getComponentMapper() = ComponentPacker.getMapper(this)
+fun Class<out Component>.getComponentMapper() = ComponentPacker.getMapper(this)

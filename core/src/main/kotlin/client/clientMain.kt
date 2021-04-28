@@ -13,6 +13,7 @@ import io.netty.handler.codec.serialization.ClassResolvers
 import io.netty.handler.codec.serialization.ObjectDecoder
 import io.netty.handler.codec.serialization.ObjectEncoder
 import java.lang.Exception
+import kotlin.system.measureTimeMillis
 
 
 class Client(
@@ -41,9 +42,7 @@ class Client(
 
     fun start(): ChannelFuture {
         val future = bootstrap.connect(ip, port)
-        suspend {
-            connection = future.channel()
-        }
+        connection = future.channel()
         return future
     }
 

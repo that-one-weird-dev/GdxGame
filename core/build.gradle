@@ -2,6 +2,8 @@
 eclipse.project.name = appName + '-core'
 
 dependencies {
+	implementation group: 'io.netty', name: 'netty-all', version: '4.1.63.Final'
+
 	api "com.badlogicgames.gdx:gdx:$gdxVersion"
 	api "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 	api "com.badlogicgames.ashley:ashley:$ashleyVersion"

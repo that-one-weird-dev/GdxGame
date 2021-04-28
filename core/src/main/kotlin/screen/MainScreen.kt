@@ -1,21 +1,15 @@
 package screen
 
-import AnimationProvider
-import GameAnimation
 import Game
-import com.badlogic.gdx.math.Vector3
+import GameAnimation
 import ecs.components.*
-import ecs.components.synchronization.callMethod
-import ecs.components.synchronization.pack
-import ecs.components.synchronization.setField
-import ecs.createEntityWithId
-import ecs.systems.SmoothMoveSystem
-import ktx.ashley.with
 import ktx.log.debug
 import ktx.log.logger
+import packets.PacketCallMethod
 import packets.PacketCreateEntity
 import packets.with
 import kotlin.math.min
+import kotlin.reflect.typeOf
 
 private val LOG = logger<MainScreen>()
 
@@ -30,7 +24,7 @@ class MainScreen(game: Game) : AbstractScreen(game) {
             with<IDComponent> {
                 id = "down"
             }
-            with<TransformComponent>() {
+            with<TransformComponent> {
                 setInitialPosition(8f, 4.5f, 0f)
                 size.set(2.5f, 2.5f)
             }
@@ -43,6 +37,14 @@ class MainScreen(game: Game) : AbstractScreen(game) {
             with<FlipComponent>()
         }
         packet.execute(game)
+
+        val callPacket = PacketCallMethod(
+            "down",
+            TransformComponent::class.java,
+            "test",
+            arrayOf("esatto")
+        )
+        callPacket.execute(game)
     }
 
     override fun render(delta: Float) {

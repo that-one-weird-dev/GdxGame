@@ -18,8 +18,7 @@ class MainScreen(game: Game) : AbstractScreen(game) {
     override fun show() {
         LOG.debug { "Main screen shown" }
 
-        client.start().await()
-        client.close()
+        client.start()
     }
 
     override fun render(delta: Float) {

@@ -34,31 +34,23 @@ class PacketCreateEntity(
 
     data class Component(val type: Class<out EntityComponent>, val fields: Map<String, Any?>)
 
-    data class Configurator(
-        val components: MutableList<Component> = mutableListOf()
-    ) {
-        inline fun <reified T : EntityComponent> with(configure: T.() -> Unit = {}) {
-            val comp = ClassReflection.newInstance(T::class.java)
-            comp.configure()
-
-            components.add(
-                Component(
-                    comp::class.java,
-                    comp.pack(),
-                )
-            )
-        }
-
-        fun toArray(): Array<Component> {
-            return components.toTypedArray()
-        }
-    }
-
     companion object {
-        fun create(configure: Configurator.() -> Unit): PacketCreateEntity {
-            val conf = Configurator()
+        fun create(configure: MutableList<Component>.() -> Unit): PacketCreateEntity {
+            val conf = mutableListOf<Component>()
             conf.configure()
-            return PacketCreateEntity(conf.toArray())
+            return PacketCreateEntity(conf.toTypedArray())
         }
     }
+}
+
+inline fun <reified T: EntityComponent> MutableList<PacketCreateEntity.Component>.with(configure: T.() -> Unit = {}) {
+    val comp = ClassReflection.newInstance(T::class.java)
+    comp.configure()
+
+    add(
+        PacketCreateEntity.Component(
+            comp::class.java,
+            comp.pack(),
+        )
+    )
 }

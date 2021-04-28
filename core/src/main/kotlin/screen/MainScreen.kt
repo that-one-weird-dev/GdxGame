@@ -48,8 +48,4 @@ class MainScreen(game: Game) : AbstractScreen(game) {
     override fun render(delta: Float) {
         engine.update(min(MAX_DELTA_TIME, delta))
     }
-
-    override fun dispose() {
-        super.dispose()
-    }
 }

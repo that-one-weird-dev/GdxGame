@@ -79,3 +79,5 @@ fun EntityComponent.pack(): Map<String, Any?> = ComponentPacker.packComponent(th
 fun EntityComponent.callMethod(name: String, vararg args: Any?) = ComponentPacker.callMethod(this, name, args = args)
 fun EntityComponent.setField(name: String, value: Any?) = ComponentPacker.setField(this, name, value)
 fun EntityComponent.getMapper() = ComponentPacker.getMapper(this::class.java)
+
+fun Class<out EntityComponent>.getComponentMapper() = ComponentPacker.getMapper(this)

@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
 import ecs.EntityComponent
 import ecs.components.synchronization.Sync
+import ecs.components.synchronization.SyncMethod
 import ktx.ashley.EngineEntity
 import ktx.ashley.get
 import ktx.ashley.mapperFor
@@ -16,16 +17,31 @@ import java.io.Serializable
 
 class TransformComponent : EntityComponent, Comparable<TransformComponent> {
     @Sync
-    val position = Vector3()
+    var position = Vector3()
+        set(value) {
+            field.set(value)
+        }
     @Sync
-    val globalPosition = Vector3()
+    var globalPosition = Vector3()
+        set(value) {
+            field.set(value)
+        }
 
     @Sync
-    val size = Vector2(1f, 1f)
+    var size = Vector2(1f, 1f)
+        set(value) {
+            field.set(value)
+        }
     @Sync
     var rotationDeg = 0f
 
     var parent: Entity? = null
+
+
+    @SyncMethod
+    fun setParent(id: String) {
+        parent = Game.entities[id]
+    }
 
     override fun reset() {
         position.set(Vector3.Zero)

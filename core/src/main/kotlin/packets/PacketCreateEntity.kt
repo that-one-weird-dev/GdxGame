@@ -8,7 +8,7 @@ import ecs.components.synchronization.setField
 import ktx.ashley.entity
 
 class PacketCreateEntity(
-    val components: Array<Component>,
+    val components: Array<ComponentData>,
 ) : Packet {
     override fun execute(game: Game) {
         val engine = game.engine
@@ -32,23 +32,21 @@ class PacketCreateEntity(
         }
     }
 
-    data class Component(val type: Class<out EntityComponent>, val fields: Map<String, Any?>)
-
     companion object {
-        fun create(configure: MutableList<Component>.() -> Unit): PacketCreateEntity {
-            val conf = mutableListOf<Component>()
+        fun create(configure: MutableList<ComponentData>.() -> Unit): PacketCreateEntity {
+            val conf = mutableListOf<ComponentData>()
             conf.configure()
             return PacketCreateEntity(conf.toTypedArray())
         }
     }
 }
 
-inline fun <reified T: EntityComponent> MutableList<PacketCreateEntity.Component>.with(configure: T.() -> Unit = {}) {
+inline fun <reified T: EntityComponent> MutableList<ComponentData>.with(configure: T.() -> Unit = {}) {
     val comp = ClassReflection.newInstance(T::class.java)
     comp.configure()
 
     add(
-        PacketCreateEntity.Component(
+        ComponentData(
             comp::class.java,
             comp.pack(),
         )

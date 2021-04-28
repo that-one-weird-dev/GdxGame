@@ -2,6 +2,7 @@ package packets
 
 import Game
 import com.badlogic.ashley.core.Component
+import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.utils.reflect.ClassReflection
 import ecs.EntityComponent
 import ecs.components.synchronization.pack
@@ -38,6 +39,14 @@ class PacketCreateEntity(
             val conf = mutableListOf<ComponentData>()
             conf.configure()
             return PacketCreateEntity(conf.toTypedArray())
+        }
+
+        fun fromEntity(entity: Entity): PacketCreateEntity {
+            return create {
+                entity.components.forEach {
+                    add(ComponentData.fromComponent(it))
+                }
+            }
         }
     }
 }

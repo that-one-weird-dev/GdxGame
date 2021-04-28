@@ -16,5 +16,9 @@ data class ComponentData(val type: Class<out Component>, val fields: Map<String,
                 comp.pack(),
             )
         }
+
+        fun fromComponent(component: Component): ComponentData {
+            return ComponentData(component::class.java, component.pack())
+        }
     }
 }

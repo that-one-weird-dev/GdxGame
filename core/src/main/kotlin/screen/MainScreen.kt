@@ -43,6 +43,7 @@ class MainScreen(game: Game) : AbstractScreen(game) {
             with<FlipComponent>()
         }
         packet.execute(game)
+    }
 
     override fun render(delta: Float) {
         engine.update(min(MAX_DELTA_TIME, delta))

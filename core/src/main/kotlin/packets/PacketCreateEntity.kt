@@ -1,6 +1,7 @@
 package packets
 
 import Game
+import com.badlogic.ashley.core.Component
 import com.badlogic.gdx.utils.reflect.ClassReflection
 import ecs.EntityComponent
 import ecs.components.synchronization.pack
@@ -41,14 +42,5 @@ class PacketCreateEntity(
     }
 }
 
-inline fun <reified T: EntityComponent> MutableList<ComponentData>.with(configure: T.() -> Unit = {}) {
-    val comp = ClassReflection.newInstance(T::class.java)
-    comp.configure()
-
-    add(
-        ComponentData(
-            comp::class.java,
-            comp.pack(),
-        )
-    )
-}
+inline fun <reified T: Component> MutableList<ComponentData>.with(configure: T.() -> Unit = {})
+    = add(ComponentData.create(configure))

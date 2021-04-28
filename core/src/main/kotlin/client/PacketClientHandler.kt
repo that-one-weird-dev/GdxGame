@@ -1,17 +1,16 @@
+package client
+
+import Game
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.ChannelInboundHandlerAdapter
-import java.io.Serializable
-import kotlin.reflect.typeOf
+import packets.Packet
 
-class EchoClientHandler : ChannelInboundHandlerAdapter() {
-
-    override fun channelActive(ctx: ChannelHandlerContext) {
-        ctx.writeAndFlush(Test("ciao"))
-        println("Packet sent")
-    }
+class PacketClientHandler(val game: Game) : ChannelInboundHandlerAdapter() {
 
     override fun channelRead(ctx: ChannelHandlerContext, msg: Any) {
-        println("Received: ${msg.javaClass.name}")
+        if (msg !is Packet) return
+
+        msg.execute(game)
     }
 
     override fun channelReadComplete(ctx: ChannelHandlerContext) {
@@ -23,6 +22,3 @@ class EchoClientHandler : ChannelInboundHandlerAdapter() {
         ctx.close()
     }
 }
-
-
-data class Test(val message: String) : Serializable

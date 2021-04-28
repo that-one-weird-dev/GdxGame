@@ -35,11 +35,16 @@ class Client(
                 }
             })
     }
-    private var connection: Channel? = null
+    var connection: Channel? = null
+        private set
+
 
     fun start(): ChannelFuture {
-        connection = bootstrap.connect(ip, port).channel()
-        return connection?.closeFuture() ?: throw Exception("Unexpected error in client while connecting")
+        val future = bootstrap.connect(ip, port)
+        suspend {
+            connection = future.channel()
+        }
+        return future
     }
 
     fun close(): ChannelFuture {

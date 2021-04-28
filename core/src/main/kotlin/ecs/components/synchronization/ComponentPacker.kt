@@ -22,6 +22,10 @@ object ComponentPacker {
         }
     }
 
+    fun setField(obj: EntityComponent, name: String, value: Any?) {
+        get(obj::class.java).fields[name]?.setter?.invoke(obj, value)
+    }
+
     private fun addReflection(cl: Class<*>): ComponentReflection {
         val fieldSetters = mutableMapOf<String, ComponentReflection.FieldSetter>()
         val methods = mutableMapOf<String, Method>()
@@ -60,3 +64,4 @@ object ComponentPacker {
 
 fun EntityComponent.pack(): Map<String, Any?> = ComponentPacker.packComponent(this)
 fun EntityComponent.callMethod(name: String, vararg args: Any?) = ComponentPacker.callMethod(this, name, args = args)
+fun EntityComponent.setField(name: String, value: Any?) = ComponentPacker.setField(this, name, value)

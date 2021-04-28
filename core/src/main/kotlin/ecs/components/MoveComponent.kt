@@ -16,7 +16,7 @@ import java.io.Serializable
 
 class MoveComponent : EntityComponent {
     @Sync
-    val speed = Vector2()
+    var speed = Vector2()
     val prevPosition = Vector3()
     val interpolatedPosition = Vector3()
 

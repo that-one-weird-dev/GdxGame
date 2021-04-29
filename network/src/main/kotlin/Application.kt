@@ -4,14 +4,14 @@ import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.ApplicationListener
 import com.badlogic.gdx.utils.ObjectMap
 import ecs.components.*
-import ktx.ashley.entity
+import ecs.createEntityWithId
 import ktx.ashley.get
 import ktx.ashley.with
 import ktx.collections.set
 import ktx.log.debug
 import ktx.log.logger
 import packets.PacketCreateEntity
-import java.util.*
+import packets.PacketRemoveEntity
 
 
 private const val PORT = 8000
@@ -47,15 +47,14 @@ class Application : ApplicationListener {
                     ?: return LOG.debug { "Tried removing an entity without and ID, this should be impossible" }
 
                 entities.remove(id.id)
+
+                server.send(PacketRemoveEntity(id.id))
             }
         })
 
         server.start()
 
-        engine.entity {
-            with<IDComponent> {
-                id = UUID.randomUUID().toString()
-            }
+        engine.createEntityWithId {
             with<TransformComponent> {
                 setInitialPosition(8f, 4.5f, 0f)
                 size.set(2.5f, 2.5f)

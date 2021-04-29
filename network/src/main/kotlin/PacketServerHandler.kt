@@ -10,12 +10,9 @@ class PacketServerHandler(val app: Application) : ChannelInboundHandlerAdapter()
     override fun channelActive(ctx: ChannelHandlerContext) {
         println("someone connected")
         println(app.entities.size)
-        val time = measureTimeMillis {
-            app.entities.forEach {
-                ctx.write(PacketCreateEntity.fromEntity(it.value))
-            }
+        app.entities.forEach {
+            ctx.write(PacketCreateEntity.fromEntity(it.value))
         }
-        println(time)
         ctx.flush()
     }
 

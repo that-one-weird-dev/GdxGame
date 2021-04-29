@@ -10,6 +10,7 @@ import ktx.ashley.with
 import ktx.collections.set
 import ktx.log.debug
 import ktx.log.logger
+import packets.PacketCallMethod
 import packets.PacketCreateEntity
 import packets.PacketRemoveEntity
 
@@ -26,6 +27,10 @@ class Application : ApplicationListener {
     val engine by lazy {
         PooledEngine().apply {
         }
+    }
+
+    init {
+        instance = this
     }
 
     override fun create() {
@@ -54,7 +59,7 @@ class Application : ApplicationListener {
 
         server.start()
 
-        engine.createEntityWithId {
+        engine.createEntityWithId("test") {
             with<TransformComponent> {
                 setInitialPosition(8f, 4.5f, 0f)
                 size.set(2.5f, 2.5f)
@@ -74,4 +79,8 @@ class Application : ApplicationListener {
     override fun render() {}
     override fun pause() {}
     override fun resume() {}
+
+    companion object {
+        lateinit var instance: Application
+    }
 }

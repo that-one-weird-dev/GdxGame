@@ -5,7 +5,7 @@ import packets.PacketCreateEntity
 import packets.with
 import kotlin.system.measureTimeMillis
 
-class PacketServerHandler(val app: Application) : ChannelInboundHandlerAdapter() {
+class PacketServerHandler(private val app: Application) : ChannelInboundHandlerAdapter() {
 
     override fun channelActive(ctx: ChannelHandlerContext) {
         println("someone connected")

@@ -66,14 +66,6 @@ class Application : ApplicationListener {
             with<MoveComponent>()
             with<FlipComponent>()
         }
-
-        repeat(100000) {
-            engine.entity {
-                with<IDComponent> {
-                    id = UUID.randomUUID().toString()
-                }
-            }
-        }
     }
 
     override fun dispose() {}

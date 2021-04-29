@@ -1,19 +1,15 @@
 package ecs.components
 
 import Game
-import com.badlogic.ashley.core.Component
-import com.badlogic.ashley.core.ComponentMapper
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
 import ecs.EntityComponent
 import ecs.components.synchronization.Sync
 import ecs.components.synchronization.SyncMethod
-import ktx.ashley.EngineEntity
 import ktx.ashley.get
 import ktx.ashley.mapperFor
-import ktx.ashley.with
-import java.io.Serializable
+import kotlin.math.abs
 
 class TransformComponent : EntityComponent, Comparable<TransformComponent> {
     @Sync
@@ -39,7 +35,22 @@ class TransformComponent : EntityComponent, Comparable<TransformComponent> {
 
 
     @SyncMethod
-    fun setParent(id: String) {
+    fun syncSetPosition(x: Float, y: Float, z: Float) {
+        position.set(x, y, z)
+    }
+
+    @SyncMethod
+    fun syncSetPositionRounded(x: Float, y: Float, z: Float) {
+        if (abs(position.x - x) > .5f)
+            position.x = x
+        if (abs(position.y - y) > .5f)
+            position.y = y
+        if (abs(position.z - z) > .5f)
+            position.z = z
+    }
+
+    @SyncMethod
+    fun syncSetParent(id: String) {
         parent = Game.entities[id]
     }
 

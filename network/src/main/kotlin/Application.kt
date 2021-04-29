@@ -39,7 +39,7 @@ class Application : ApplicationListener {
                 }
                 entities[id.id] = entity
 
-                server.send(PacketCreateEntity.fromEntity(entity))
+                server.broadcast(PacketCreateEntity.fromEntity(entity))
             }
 
             override fun entityRemoved(entity: Entity) {
@@ -48,7 +48,7 @@ class Application : ApplicationListener {
 
                 entities.remove(id.id)
 
-                server.send(PacketRemoveEntity(id.id))
+                server.broadcast(PacketRemoveEntity(id.id))
             }
         })
 

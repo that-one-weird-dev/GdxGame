@@ -39,7 +39,7 @@ class Server(val port: Int, val app: Application) {
         return future
     }
 
-    fun send(packet: Packet): ChannelFuture? {
+    fun broadcast(packet: Packet): ChannelFuture? {
         return connection?.write(packet)
     }
 

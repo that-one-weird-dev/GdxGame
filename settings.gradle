@@ -1,2 +1,2 @@
-include 'lwjgl3', 'headless', 'core'
+include "lwjgl3", "headless", "core", "net-core"
 

@@ -1,13 +1,13 @@
-apply plugin: 'application'
+apply plugin: "application"
 
-sourceSets.main.resources.srcDirs += [rootProject.file('assets').path]
-mainClassName = 'com.skye.test.gdxtest.lwjgl3.Lwjgl3LauncherKt'
-eclipse.project.name = appName + '-lwjgl3'
+sourceSets.main.resources.srcDirs += [rootProject.file("assets").path]
+mainClassName = "Lwjgl3LauncherKt"
+eclipse.project.name = appName + "-lwjgl3"
 sourceCompatibility = 8.0
 
 dependencies {
     implementation project(':core')
 
-    implementation 'com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdxVersion'
-    implementation 'com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop'
+    implementation "com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdxVersion"
+    implementation "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
 }

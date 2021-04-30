@@ -1,15 +1,16 @@
-import ecs.components.*
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.ChannelInboundHandlerAdapter
+import ktx.log.debug
+import ktx.log.logger
 import packets.PacketCreateEntity
-import packets.with
-import kotlin.system.measureTimeMillis
+
+
+private val LOG = logger<PacketCreateEntity>()
 
 class PacketServerHandler(private val app: Application) : ChannelInboundHandlerAdapter() {
 
     override fun channelActive(ctx: ChannelHandlerContext) {
-        println("someone connected")
-        println(app.entities.size)
+        LOG.debug { "Someone connected" }
         app.entities.forEach {
             ctx.write(PacketCreateEntity.fromEntity(it.value))
         }
@@ -18,7 +19,6 @@ class PacketServerHandler(private val app: Application) : ChannelInboundHandlerA
 
 
     override fun channelRead(ctx: ChannelHandlerContext, msg: Any) {
-        println("Received message")
         ctx.write(msg)
     }
 

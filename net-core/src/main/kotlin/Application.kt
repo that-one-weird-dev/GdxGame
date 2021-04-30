@@ -10,7 +10,6 @@ import ktx.ashley.with
 import ktx.collections.set
 import ktx.log.debug
 import ktx.log.logger
-import packets.PacketCallMethod
 import packets.PacketCreateEntity
 import packets.PacketRemoveEntity
 

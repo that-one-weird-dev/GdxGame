@@ -1,13 +1,12 @@
 apply plugin: "application"
 
-sourceSets.main.resources.srcDirs += [rootProject.file("assets").path]
-mainClassName = "Lwjgl3LauncherKt"
-eclipse.project.name = appName + "-lwjgl3"
-sourceCompatibility = 8.0
+version "0.0.1"
 
 dependencies {
     implementation project(':core')
 
     implementation "com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdxVersion"
     implementation "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+
+    implementation "io.github.libktx:ktx-app:$ktxVersion"
 }

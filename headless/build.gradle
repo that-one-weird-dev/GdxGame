@@ -3,14 +3,7 @@ apply plugin: "application"
 version "0.0.1"
 
 dependencies {
-    implementation project(":core")
-
-    implementation "org.jetbrains.kotlin:kotlin-stdlib"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3"
-
-    implementation "org.slf4j:slf4j-simple:1.7.26"
-
-    implementation "io.netty:netty-all:4.1.63.Final"
+    implementation project(":net-core")
 
     implementation "com.badlogicgames.gdx:gdx-backend-headless:1.9.14"
     implementation "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"

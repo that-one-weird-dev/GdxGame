@@ -2,6 +2,8 @@ apply plugin: "application"
 
 version "0.0.1"
 
+sourceSets.main.resources.srcDirs += [rootProject.file("assets").path]
+
 dependencies {
     implementation project(':core')
 

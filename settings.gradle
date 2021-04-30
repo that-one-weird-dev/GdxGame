@@ -1,3 +1,2 @@
-include 'lwjgl3', 'core'
-include 'network', 'common'
+include 'lwjgl3', 'headless', 'core'
 

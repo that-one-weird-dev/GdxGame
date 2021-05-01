@@ -1,3 +1,4 @@
+import client.Client
 import com.badlogic.ashley.core.Engine
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.core.EntityListener
@@ -41,6 +42,8 @@ object Game: KtxGame<AbstractScreen>() {
 
     val entities = mutableMapOf<String, Entity>()
 
+    val client = Client("localhost", 8000)
+
     override fun create() {
         Gdx.app.logLevel = Application.LOG_DEBUG
         LOG.debug { "Creating game instance" }
@@ -56,7 +59,9 @@ object Game: KtxGame<AbstractScreen>() {
             }
         })
 
-        addScreen(MainScreen(this))
+        client.start()
+
+        addScreen(MainScreen())
         setScreen<MainScreen>()
     }
 

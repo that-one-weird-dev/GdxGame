@@ -1,5 +1,6 @@
 package ecs.systems
 
+import GameAnimation
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem
 import com.badlogic.gdx.Gdx
@@ -33,7 +34,12 @@ class PlayerInputSystem(
 
         moveComp.speed.set(speedX, speedY)
 
-        val anim = if(speedX != 0f || speedY != 0f) GameAnimation.PLAYER_RUN else GameAnimation.PLAYER_IDLE
+        val anim: GameAnimation
+        if(speedX != 0f || speedY != 0f)
+
+            anim = GameAnimation.PLAYER_RUN
+        else anim = GameAnimation.PLAYER_IDLE
+
         if (animComp.currentAnimation != anim)
             animComp.currentAnimation = anim
     }

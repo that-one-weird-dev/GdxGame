@@ -5,14 +5,14 @@ import com.badlogic.ashley.core.Component
 import com.badlogic.ashley.core.Entity
 import ecs.components.synchronization.setField
 import ktx.ashley.entity
-import packets.ComponentData
 import packets.ClientPacket
+import packets.ComponentData
 
 class PacketCreateEntity(
     val components: Array<ComponentData>,
 ) : ClientPacket {
-    override fun execute(game: Game) {
-        val engine = game.engine
+    override fun execute() {
+        val engine = Game.engine
 
         engine.entity {
             // Code from ktx.ashley.engines (using this because i can not use generics)
@@ -50,5 +50,5 @@ class PacketCreateEntity(
     }
 }
 
-inline fun <reified T: Component> MutableList<ComponentData>.with(configure: T.() -> Unit = {})
-    = add(ComponentData.create(configure))
+inline fun <reified T : Component> MutableList<ComponentData>.with(configure: T.() -> Unit = {}) =
+    add(ComponentData.create(configure))

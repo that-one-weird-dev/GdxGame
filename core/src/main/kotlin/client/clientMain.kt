@@ -1,6 +1,5 @@
 package client
 
-import Game
 import io.netty.bootstrap.Bootstrap
 import io.netty.channel.Channel
 import io.netty.channel.ChannelFuture
@@ -12,14 +11,11 @@ import io.netty.channel.socket.nio.NioSocketChannel
 import io.netty.handler.codec.serialization.ClassResolvers
 import io.netty.handler.codec.serialization.ObjectDecoder
 import io.netty.handler.codec.serialization.ObjectEncoder
-import java.lang.Exception
-import kotlin.system.measureTimeMillis
 
 
 class Client(
     val ip: String,
     val port: Int,
-    private val game: Game,
 ) {
     private val group = NioEventLoopGroup()
     private val bootstrap = Bootstrap().apply {
@@ -31,7 +27,7 @@ class Client(
                     ch.pipeline().addLast(
                         ObjectDecoder(ClassResolvers.softCachingResolver(ClassLoader.getSystemClassLoader())),
                         ObjectEncoder(),
-                        PacketClientHandler(game),
+                        PacketClientHandler(),
                     )
                 }
             })

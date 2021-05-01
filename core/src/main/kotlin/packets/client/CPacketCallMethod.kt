@@ -13,7 +13,7 @@ class CPacketCallMethod(
     private val methodName: String,
     private val args: Array<Any?> = arrayOf(),
 ) : ClientPacket {
-    override fun execute(game: Game) {
+    override fun execute() {
         val entity = Game.entities[entityId]
         val comp = entity?.get(componentType.getComponentMapper()) ?: return
 

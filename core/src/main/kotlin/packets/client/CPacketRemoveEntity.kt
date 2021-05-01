@@ -7,8 +7,8 @@ class CPacketRemoveEntity(
     val entityId: String,
 ) : ClientPacket {
 
-    override fun execute(game: Game) {
+    override fun execute() {
         val entity = Game.entities[entityId]
-        game.engine.removeEntity(entity)
+        Game.engine.removeEntity(entity)
     }
 }

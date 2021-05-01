@@ -12,6 +12,7 @@ import io.netty.handler.codec.serialization.ClassResolvers
 import io.netty.handler.codec.serialization.ObjectDecoder
 import io.netty.handler.codec.serialization.ObjectEncoder
 import packets.ClientPacket
+import packets.ServerPacket
 
 
 class Client(
@@ -37,7 +38,7 @@ class Client(
         private set
 
 
-    fun send(packet: ClientPacket) {
+    fun send(packet: ServerPacket) {
         connection?.write(packet)
     }
 

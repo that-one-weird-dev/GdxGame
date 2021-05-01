@@ -2,6 +2,7 @@ package screen
 
 import ktx.log.debug
 import ktx.log.logger
+import kotlin.concurrent.thread
 import kotlin.math.min
 
 private val LOG = logger<MainScreen>()
@@ -12,6 +13,13 @@ class MainScreen : AbstractScreen() {
 
     override fun show() {
         LOG.debug { "Main screen shown" }
+
+        thread {
+            while(true) {
+                Thread.sleep(50)
+                Game.client.flush()
+            }
+        }
     }
 
     override fun render(delta: Float) {

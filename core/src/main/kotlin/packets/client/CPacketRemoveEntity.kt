@@ -1,11 +1,11 @@
 package packets.client
 
 import Game
-import packets.Packet
+import packets.ClientPacket
 
-class PacketRemoveEntity(
+class CPacketRemoveEntity(
     val entityId: String,
-) : Packet {
+) : ClientPacket {
 
     override fun execute(game: Game) {
         val entity = Game.entities[entityId]

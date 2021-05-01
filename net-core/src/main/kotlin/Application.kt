@@ -11,7 +11,7 @@ import ktx.collections.set
 import ktx.log.debug
 import ktx.log.logger
 import packets.client.PacketCreateEntity
-import packets.client.PacketRemoveEntity
+import packets.client.CPacketRemoveEntity
 import packets.reflection.PacketImplementationReflection
 
 
@@ -56,7 +56,7 @@ class Application : ApplicationListener {
 
                 entities.remove(id.id)
 
-                server.broadcast(PacketRemoveEntity(id.id))
+                server.broadcast(CPacketRemoveEntity(id.id))
             }
         })
 

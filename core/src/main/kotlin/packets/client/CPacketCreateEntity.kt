@@ -6,11 +6,11 @@ import com.badlogic.ashley.core.Entity
 import ecs.components.synchronization.setField
 import ktx.ashley.entity
 import packets.ComponentData
-import packets.Packet
+import packets.ClientPacket
 
 class PacketCreateEntity(
     val components: Array<ComponentData>,
-) : Packet {
+) : ClientPacket {
     override fun execute(game: Game) {
         val engine = game.engine
 

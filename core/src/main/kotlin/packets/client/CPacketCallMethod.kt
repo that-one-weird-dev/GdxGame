@@ -5,14 +5,14 @@ import com.badlogic.ashley.core.Component
 import ecs.components.synchronization.callMethod
 import ecs.components.synchronization.getComponentMapper
 import ktx.ashley.get
-import packets.Packet
+import packets.ClientPacket
 
-class PacketCallMethod(
+class CPacketCallMethod(
     private val entityId: String,
     private val componentType: Class<out Component>,
     private val methodName: String,
     private val args: Array<Any?> = arrayOf(),
-) : Packet {
+) : ClientPacket {
     override fun execute(game: Game) {
         val entity = Game.entities[entityId]
         val comp = entity?.get(componentType.getComponentMapper()) ?: return

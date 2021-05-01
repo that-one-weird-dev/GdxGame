@@ -3,12 +3,12 @@ package client
 import Game
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.ChannelInboundHandlerAdapter
-import packets.Packet
+import packets.ClientPacket
 
 class PacketClientHandler(val game: Game) : ChannelInboundHandlerAdapter() {
 
     override fun channelRead(ctx: ChannelHandlerContext, msg: Any) {
-        if (msg !is Packet) return
+        if (msg !is ClientPacket) return
 
         msg.execute(game)
     }

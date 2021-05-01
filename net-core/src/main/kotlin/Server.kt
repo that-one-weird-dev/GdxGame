@@ -9,8 +9,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel
 import io.netty.handler.codec.serialization.ClassResolvers
 import io.netty.handler.codec.serialization.ObjectDecoder
 import io.netty.handler.codec.serialization.ObjectEncoder
-import packets.Packet
-import packets.reflection.PacketImplementationReflection
+import packets.ClientPacket
 import java.lang.Exception
 
 class Server(val port: Int) {
@@ -40,7 +39,7 @@ class Server(val port: Int) {
         return future
     }
 
-    fun broadcast(packet: Packet): ChannelFuture? {
+    fun broadcast(packet: ClientPacket): ChannelFuture? {
         return connection?.write(packet)
     }
 

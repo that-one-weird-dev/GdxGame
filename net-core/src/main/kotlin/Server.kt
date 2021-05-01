@@ -10,9 +10,10 @@ import io.netty.handler.codec.serialization.ClassResolvers
 import io.netty.handler.codec.serialization.ObjectDecoder
 import io.netty.handler.codec.serialization.ObjectEncoder
 import packets.Packet
+import packets.reflection.PacketImplementationReflection
 import java.lang.Exception
 
-class Server(val port: Int, val app: Application) {
+class Server(val port: Int) {
 
     private val bossGroup = NioEventLoopGroup()
     private val workerGroup = NioEventLoopGroup()
@@ -24,7 +25,7 @@ class Server(val port: Int, val app: Application) {
                     ch.pipeline().addLast(
                         ObjectDecoder(ClassResolvers.softCachingResolver(ClassLoader.getSystemClassLoader())),
                         ObjectEncoder(),
-                        PacketServerHandler(app),
+                        PacketServerHandler(),
                     )
                 }
             })

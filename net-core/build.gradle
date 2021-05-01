@@ -6,6 +6,8 @@ dependencies {
 
 	implementation "io.netty:netty-all:4.1.63.Final"
 
+	implementation "org.reflections:reflections:0.9.12"
+
 	implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
 	implementation "com.badlogicgames.ashley:ashley:$ashleyVersion"
 

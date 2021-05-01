@@ -10,8 +10,9 @@ import ktx.ashley.with
 import ktx.collections.set
 import ktx.log.debug
 import ktx.log.logger
-import packets.PacketCreateEntity
-import packets.PacketRemoveEntity
+import packets.client.PacketCreateEntity
+import packets.client.PacketRemoveEntity
+import packets.reflection.PacketImplementationReflection
 
 
 private const val PORT = 8000
@@ -22,7 +23,10 @@ class Application : ApplicationListener {
 
     val entities: ObjectMap<String, Entity> = ObjectMap()
 
-    val server = Server(PORT, this)
+    val pir = PacketImplementationReflection().apply {
+        load()
+    }
+    val server = Server(PORT)
     val engine by lazy {
         PooledEngine().apply {
         }
@@ -55,6 +59,9 @@ class Application : ApplicationListener {
                 server.broadcast(PacketRemoveEntity(id.id))
             }
         })
+
+        val pir = PacketImplementationReflection()
+        pir.load()
 
         server.start()
 

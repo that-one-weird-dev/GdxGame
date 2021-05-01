@@ -23,12 +23,11 @@ class PacketServerHandler : ChannelInboundHandlerAdapter() {
 
 
     override fun channelRead(ctx: ChannelHandlerContext, msg: Any) {
-        println("Received message: $msg")
         if (msg !is ServerPacket) return
 
         // Should never fail because of the check before
         val method = pir.get(msg::class.java as Class<out ServerPacket>)
-        method?.invoke(msg, msg)
+        method?.invoke(msg, msg, ctx)
     }
 
     override fun channelReadComplete(ctx: ChannelHandlerContext) {

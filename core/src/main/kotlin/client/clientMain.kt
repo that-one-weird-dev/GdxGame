@@ -11,6 +11,7 @@ import io.netty.channel.socket.nio.NioSocketChannel
 import io.netty.handler.codec.serialization.ClassResolvers
 import io.netty.handler.codec.serialization.ObjectDecoder
 import io.netty.handler.codec.serialization.ObjectEncoder
+import packets.ClientPacket
 
 
 class Client(
@@ -35,6 +36,14 @@ class Client(
     var connection: Channel? = null
         private set
 
+
+    fun send(packet: ClientPacket) {
+        connection?.write(packet)
+    }
+
+    fun flush() {
+        connection?.flush()
+    }
 
     fun start(): ChannelFuture {
         val future = bootstrap.connect(ip, port)

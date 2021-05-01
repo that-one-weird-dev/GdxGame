@@ -10,12 +10,11 @@ private val LOG = logger<PacketCreateEntity>()
 
 class PacketServerHandler : ChannelInboundHandlerAdapter() {
 
-    private val app = Application.instance
-    private val pir = app.pir
+    private val pir = Application.pir
 
     override fun channelActive(ctx: ChannelHandlerContext) {
         LOG.debug { "Someone connected" }
-        Application.instance.entities.forEach {
+        Application.entities.forEach {
             ctx.write(PacketCreateEntity.fromEntity(it.value))
         }
         ctx.flush()

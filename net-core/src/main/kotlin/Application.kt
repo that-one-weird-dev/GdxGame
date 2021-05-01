@@ -19,7 +19,7 @@ private const val PORT = 8000
 
 private val LOG = logger<Application>()
 
-class Application : ApplicationListener {
+object Application: ApplicationListener {
 
     val entities: ObjectMap<String, Entity> = ObjectMap()
 
@@ -30,10 +30,6 @@ class Application : ApplicationListener {
     val engine by lazy {
         PooledEngine().apply {
         }
-    }
-
-    init {
-        instance = this
     }
 
     override fun create() {
@@ -85,8 +81,4 @@ class Application : ApplicationListener {
     override fun render() {}
     override fun pause() {}
     override fun resume() {}
-
-    companion object {
-        lateinit var instance: Application
-    }
 }

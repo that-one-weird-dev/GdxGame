@@ -12,12 +12,9 @@ import ktx.ashley.allOf
 import packets.server.SPacketMove
 
 
-private const val TOLERANCE = .2f
 private const val SPEED = 6f
 
-class PlayerInputSystem(
-    private val gameViewport: Viewport
-) : IteratingSystem(allOf(PlayerComponent::class, MoveComponent::class, AnimationComponent::class).get()) {
+class PlayerInputSystem : IteratingSystem(allOf(PlayerComponent::class, MoveComponent::class, AnimationComponent::class).get()) {
 
     private var movX: Byte = 0
     private var movY: Byte = 0

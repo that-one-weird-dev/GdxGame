@@ -28,7 +28,7 @@ object Game: KtxGame<AbstractScreen>() {
 
     val engine: Engine by lazy {
         PooledEngine().apply {
-            addSystem(PlayerInputSystem(gameViewport))
+            addSystem(PlayerInputSystem())
             addSystem(MoveSystem())
             addSystem(TransformSystem())
             addSystem(SmoothMoveSystem())

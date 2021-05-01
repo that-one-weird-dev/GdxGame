@@ -21,7 +21,7 @@ const val V_HEIGHT = 9
 
 private val LOG = logger<Game>()
 
-class Game : KtxGame<AbstractScreen>() {
+object Game: KtxGame<AbstractScreen>() {
     val batch: Batch by lazy { SpriteBatch() }
     val gameViewport by lazy { FitViewport(16f, 9f) }
 
@@ -38,6 +38,8 @@ class Game : KtxGame<AbstractScreen>() {
             addSystem(DebugSystem())
         }
     }
+
+    val entities = mutableMapOf<String, Entity>()
 
     override fun create() {
         Gdx.app.logLevel = Application.LOG_DEBUG
@@ -62,9 +64,5 @@ class Game : KtxGame<AbstractScreen>() {
         super.dispose()
         batch.dispose()
         AnimationProvider.dispose()
-    }
-
-    companion object {
-        val entities = mutableMapOf<String, Entity>()
     }
 }

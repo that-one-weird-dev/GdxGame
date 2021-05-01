@@ -1,13 +1,12 @@
-package packets
+package packets.client
 
 import Game
 import com.badlogic.ashley.core.Component
 import com.badlogic.ashley.core.Entity
-import com.badlogic.gdx.utils.reflect.ClassReflection
-import ecs.EntityComponent
-import ecs.components.synchronization.pack
 import ecs.components.synchronization.setField
 import ktx.ashley.entity
+import packets.ComponentData
+import packets.Packet
 
 class PacketCreateEntity(
     val components: Array<ComponentData>,

@@ -1,9 +1,11 @@
-package packets
+package packets.client
 
 import Game
 import ecs.components.synchronization.getComponentMapper
 import ecs.components.synchronization.setField
 import ktx.ashley.get
+import packets.ComponentData
+import packets.Packet
 
 data class PacketUpdateComponent(
     val entityId: String,

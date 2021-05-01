@@ -1,10 +1,11 @@
-package packets
+package packets.client
 
 import Game
 import com.badlogic.ashley.core.Component
 import ecs.components.synchronization.callMethod
 import ecs.components.synchronization.getComponentMapper
 import ktx.ashley.get
+import packets.Packet
 
 class PacketCallMethod(
     private val entityId: String,

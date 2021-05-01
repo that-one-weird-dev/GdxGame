@@ -1,6 +1,7 @@
-package packets
+package packets.client
 
 import Game
+import packets.Packet
 
 class PacketRemoveEntity(
     val entityId: String,
